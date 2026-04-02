@@ -1,5 +1,6 @@
 import React from "react";
 import logoimg from '../../assets/sohojcourier logo.png'
+import { NavLink } from "react-router";
 
 const Navbar = () => {
   return (
@@ -70,10 +71,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-[#0F75B8]">Sign In</a>
-        <a href="/signup" className="btn bg-[#F97316] ml-2">
+        <NavLink to="/login" className="btn bg-[#0F75B8]">
+          Sign In
+        </NavLink>
+        <NavLink to="/register" className="btn bg-[#F97316] ml-2">
           Sign Up
-        </a>
+        </NavLink>
       </div>
     </div>
   );
