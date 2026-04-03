@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../Context/AuthContext';
 
 const Login = () => {
+
+  const {signInUser} = useContext(AuthContext)
+
+  const {register , handleSubmit,formState: { errors }} = useForm()
+  
+  
+  const handleLogin = (data) =>{
+    signInUser(data.email, data.password)
+    .then(result =>{
+      const user = result.user;
+      alert('Login successful');
+      console.log(user);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+    
+  }
     return (
         <div>
              <div className="w-full max-w-md mx-auto">
@@ -16,7 +36,7 @@ const Login = () => {
         Login to your account
       </p>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit(handleLogin)} className="space-y-4">
         
         {/* Email */}
         <div>
@@ -25,9 +45,11 @@ const Login = () => {
           </label>
           <input
             type="email"
+            {...register("email", { required: "Email is required" })}
             placeholder="Enter your email"
             className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#0F75B8]"
           />
+          {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
@@ -37,9 +59,11 @@ const Login = () => {
           </label>
           <input
             type="password"
+            {...register("password", { required: "Password is required" })}
             placeholder="Enter your password"
             className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#0F75B8]"
           />
+          {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>}
         </div>
 
         {/* Forgot password */}
