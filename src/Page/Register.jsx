@@ -53,23 +53,29 @@ const Register = () => {
 
               {/* Password */}
               <div>
-                <label className="label text-sm font-medium text-gray-600">
-                  Password
-                </label>
                 <input
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters"
-                      }
-                    })}
+  {...register("password", {
+    required: "Password is required",
+    minLength: {
+      value: 6,
+      message: "Password must be at least 6 characters"
+    },
+    pattern: {
+      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/,
+      message:
+        "Password must contain uppercase, lowercase, number & special character"
+    }
+  })}
+  type="password"
+  placeholder="Create a password"
+  className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#0F75B8]"
+/>
 
-                  type="password"
-                  placeholder="Create a password"
-                  className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-[#0F75B8]"
-                />
-                {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>}
+{errors.password && (
+  <p className="text-sm text-red-500 mt-1">
+    {errors.password.message}
+  </p>
+)}
                 </div>
 
               {/* Confirm Password */}
