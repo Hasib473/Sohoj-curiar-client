@@ -3,7 +3,7 @@ import logoimg from '../../assets/sohojcourier logo.png'
 
 const Footer = () => {
     return (
-        <footer className="footer footer-horizontal footer-center bg-black text-primary-content p-10">
+        <footer className="footer footer-horizontal mt-5 footer-center bg-black text-primary-content p-10">
   <aside>
    <img className='w-auto h-30' src={logoimg} alt="" />
     <p className="font-bold">

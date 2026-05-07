@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import logoimg from '../../assets/sohojcourier logo.png'
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = () => {
+  const {user, setUser} = useContext(AuthContext);
+
+  const handlelogout = ()=>{
+    setUser(null);
+
+  }
   return (
     <div className="navbar bg-base-100 shadow-sm max-7xl mx-auto">
       <div className="navbar-start">
@@ -47,28 +54,30 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Service</a>
-          </li>
-          <li>
-            <a>About Us</a>
-          </li>
-          <li>
-            <a>Pricing</a>
-          </li>
-          <li>
-            <a>Contact Us</a>
-          </li>
-          <li>
-            <a>Blog</a>
-          </li>
+        <ul className="menu space-x-5 menu-horizontal px-1">
+          <NavLink to="/" className={({ isActive }) => `border-none transition duration-300 ${isActive ? "text-[#F97316] font-semibold" : "text-black"}`}>
+            Home
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => `border-none transition duration-300 ${isActive ? "text-[#F97316] font-semibold" : "text-black"}`}>
+            About Us
+          </NavLink>
+          <NavLink to="/pricing" className={({ isActive }) => `border-none transition duration-300 ${isActive ? "text-[#F97316] font-semibold" : "text-black"}`}>
+            Pricing
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => `border-none transition duration-300 ${isActive ? "text-[#F97316] font-semibold" : "text-black"}`}>
+            Contact Us
+          </NavLink>
+           <NavLink to="/send-parcel" className={({ isActive }) => `border-none transition duration-300 ${isActive ? "text-[#F97316] font-semibold" : "text-black"}`}>
+              Send Parcel
+            </NavLink>
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to="/login" className="btn bg-[#0F75B8]">
+       {
+        user ? <button onClick={handlelogout} className="btn bg-[#F97316] ml-2">Logout</button> :  <NavLink to="/login" className="btn bg-[#0F75B8]">
           Sign In
         </NavLink>
+       }
         <NavLink to="/register" className="btn bg-[#F97316] ml-2">
           Sign Up
         </NavLink>

@@ -1,16 +1,31 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../Context/AuthContext';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
 
-  const {signInUser} = useContext(AuthContext)
+  const {signInUser, signInWithGoogle} = useContext(AuthContext)
 
   const {register , handleSubmit,formState: { errors }} = useForm()
   
   
   const handleLogin = (data) =>{
     signInUser(data.email, data.password)
+    .then(result =>{
+      const user = result.user;
+      alert('Login successful');
+      console.log(user);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+    
+  }
+
+  const handleGoogleSignIn = () => {
+
+    signInWithGoogle()
     .then(result =>{
       const user = result.user;
       alert('Login successful');
@@ -84,8 +99,9 @@ const Login = () => {
       <div className="divider text-xs text-gray-400">OR</div>
 
       {/* Extra option */}
-      <button className="btn btn-outline w-full">
-        Continue with Google
+      <button onClick={handleGoogleSignIn} className="btn btn-outline w-full ">
+       <FaGoogle />
+       Continue with Google
       </button>
 
       {/* Signup */}
