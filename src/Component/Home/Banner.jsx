@@ -26,7 +26,7 @@ const Banner = () => {
           />
 
           {/* Overlay */}
-          <div className="absolute gap-3 inset-0 bg-black/40 flex items-end pl-28 pb-8">
+          <div className="absolute gap-3 inset-0 flex items-end pl-28 pb-8">
             <a
               className="btn bg-[#0F75B8] text-white px-6 py-2 rounded-lg hover:bg-[#0c5e94] transition"
               href="#"
@@ -53,14 +53,14 @@ const Banner = () => {
         </div>
 
         {/* Slide 3 */}
-        <div className="relative">
+        {/* <div className="relative">
           <img
-            className="h-[400px] md:h-[500px] w-full object-cover"
+            className="h-[400px] md:h-[500px] w-full object-contain"
             src={banner3}
             alt="banner3"
           />
          
-        </div>
+        </div> */}
       </Carousel>
     </div>
   );
